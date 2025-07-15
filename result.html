@@ -44,7 +44,7 @@
       const unanswered = event.names.filter(n => !answered.includes(n));
       event.names.forEach(name => {
         const row = document.createElement("tr");
-        row.innerHTML = <td>${name}</td> + event.dates.map(d => {
+        row.innerHTML = `<td>${name}</td>` + event.dates.map(d => {
           const safeKey = d.replaceAll("/", "-");
           return `<td>${event.answers?.[name]?.[safeKey] || "-"}</td>`;
         }).join("");
