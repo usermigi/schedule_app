@@ -16,14 +16,14 @@
 
   <script>
     const firebaseConfig = {
-  apiKey: "AIzaSyCKlrqoZlMhrPKbfqLZS2MvnE5FATH1cBg",
-  authDomain: "schedule-app-abbb3.firebaseapp.com",
-  databaseURL: "https://schedule-app-abbb3-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "schedule-app-abbb3",
-  storageBucket: "schedule-app-abbb3.firebasestorage.app",
-  messagingSenderId: "159076358828",
-  appId: "1:159076358828:web:57c8daa28f29404b79dd09"
-};
+      apiKey: "AIzaSyCKlrqoZlMhrPKbfqLZS2MvnE5FATH1cBg",
+      authDomain: "schedule-app-abbb3.firebaseapp.com",
+      databaseURL: "https://schedule-app-abbb3-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "schedule-app-abbb3",
+      storageBucket: "schedule-app-abbb3.firebasestorage.app",
+      messagingSenderId: "159076358828",
+      appId: "1:159076358828:web:57c8daa28f29404b79dd09"
+    };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     const id = new URLSearchParams(location.search).get("id");
@@ -44,8 +44,9 @@
       const unanswered = event.names.filter(n => !answered.includes(n));
       event.names.forEach(name => {
         const row = document.createElement("tr");
-        row.innerHTML = `<td>${name}</td>` + event.dates.map(d => {
-          return `<td>${event.answers?.[name]?.[d] || "-"}</td>`;
+        row.innerHTML = <td>${name}</td> + event.dates.map(d => {
+          const safeKey = d.replaceAll("/", "-");
+          return `<td>${event.answers?.[name]?.[safeKey] || "-"}</td>`;
         }).join("");
         table.appendChild(row);
       });
